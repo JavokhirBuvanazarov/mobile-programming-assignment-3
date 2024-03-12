@@ -1,72 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
+        android:id="@+id/waterResourceName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/version"
-        android:hint="Enter Android Version"/>
+        android:hint="Water Resource Name" />
 
     <EditText
+        android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/code"
-        android:hint="Enter Android Code"
-        android:inputType="" />
+        android:hint="Location" />
+
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type" />
+
+    <EditText
+        android:id="@+id/capacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Capacity"
+        android:inputType="number"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="add"
-        android:text="Add"/>
+        android:text="Add" />
 
-
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/table"
-        android:orientation="vertical"
-        android:stretchColumns="*"
-        android:divider="@color/black"
-        android:showDividers="beginning|middle|end"
-        android:dividerPadding="8dp"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        >
-
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Android 5"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lollipop"
-                />
-
-        </TableRow>
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Android 6"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Marshmallow"
-                />
-
-        </TableRow>
-    </TableLayout>
-</android.widget.LinearLayout>
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

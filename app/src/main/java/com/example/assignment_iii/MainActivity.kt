@@ -2,41 +2,59 @@ package com.example.assignment_iii
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var versionEditText: EditText
-    private lateinit var codeEditText: EditText
-    private lateinit var table: TableLayout
+    private lateinit var waterResourceName: EditText
+    private lateinit var location: EditText
+    private lateinit var type: EditText
+    private lateinit var capacity: EditText
+    private lateinit var addButton: Button
+    private lateinit var tableLayout: TableLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        versionEditText = findViewById(R.id.version)
-        codeEditText = findViewById(R.id.code)
-        table = findViewById(R.id.table)
+        waterResourceName = findViewById(R.id.waterResourceName)
+        location = findViewById(R.id.location)
+        type = findViewById(R.id.type)
+        capacity = findViewById(R.id.capacity)
+        addButton = findViewById(R.id.addButton)
+        tableLayout = findViewById(R.id.tableLayout)
+
+        addButton.setOnClickListener {
+            addRowToTable()
+        }
     }
 
-    fun add(view: View) {
-        val version = versionEditText.text.toString()
-        val code = codeEditText.text.toString()
+    private fun addRowToTable() {
+        val name = waterResourceName.text.toString().trim()
+        val loc = location.text.toString().trim()
+        val typ = type.text.toString().trim()
+        val cap = capacity.text.toString().trim()
 
-        val tableRow = TableRow(this)
-        val layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT)
-        tableRow.layoutParams = layoutParams
-//        Table
-        val versionText = TextView(this)
-        versionText.text = version
-        versionText.setPadding(5, 5, 5, 5)
-        val codeText = TextView(this)
-        codeText.setPadding(5, 5, 5, 5)
-        codeText.text = code
-        tableRow.addView(versionText)
-        tableRow.addView(codeText)
-        table.addView(tableRow)
+        if (name.isEmpty() || loc.isEmpty() || typ.isEmpty() || cap.isEmpty()) {
+            return
+        }
+
+        val tableRow = LayoutInflater.from(this).inflate(R.layout.table_row, null) as TableRow
+        (tableRow.getChildAt(0) as TextView).text = name
+        (tableRow.getChildAt(1) as TextView).text = loc
+        (tableRow.getChildAt(2) as TextView).text = typ
+        (tableRow.getChildAt(3) as TextView).text = cap
+
+        tableLayout.addView(tableRow)
+
+        // Clear input fields after adding
+        waterResourceName.setText("")
+        location.setText("")
+        type.setText("")
+        capacity.setText("")
     }
 }
